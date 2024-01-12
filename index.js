@@ -15,7 +15,9 @@ program
 .option('-l, --icon [iconPath]', 'le chemin vers le dossier des icones de l\'application : (Dans ce dossier, doit contenir une image icon.ico pour window, icon.incs pour mac et icon.png pour linux)')
 .option('-i, --import [boolean]', 'la commande d\'initialisation du package electron forge, utile pour le packaging de l\'application. Elle permet d\'exécuter le cli electron package, pour l\'import d\'un projet existant. Commande package. exemple : expo-ui electron package --import')
 
-program.parse();  
+try {
+    program.parse();  
+} catch{};
 const script = program.args[0];
 const appName = program.args[1];
 const options = program.opts();
