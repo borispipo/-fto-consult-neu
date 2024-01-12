@@ -17,7 +17,9 @@ program
 
 try {
     program.parse();  
-} catch{};
+} catch(e){
+    console.log(e," parsing argument");
+};
 const script = program.args[0];
 const appName = program.args[1];
 const options = program.opts();
@@ -84,6 +86,7 @@ switch(action){
         });
         break;
     default : 
+        process.env.isNeutralinoScript = process.env.isNeutralinoScript = true;
         require("@fto-consult/electron-gen/bin/index");
         break;
 }
