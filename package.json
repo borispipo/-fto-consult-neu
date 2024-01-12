@@ -1,6 +1,6 @@
 {
   "name": "@fto-consult/neut",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "cli for Neutralino js app generator and builder",
   "main": "index.js",
   "bin": {
@@ -18,7 +18,7 @@
   ],
   "author": "Boris Fouomene",
   "license": "MIT",
-  "devDependencies": {
+  "dependencies": {
     "@fto-consult/electron-gen": "^2.3.1"
   }
 }
