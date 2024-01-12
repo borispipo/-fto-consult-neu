@@ -1,13 +1,15 @@
 {
   "name": "@fto-consult/neut",
-  "version": "1.0.1",
+  "version": "1.1.0",
   "description": "cli for Neutralino js app generator and builder",
   "main": "index.js",
   "bin": {
     "@fto-consult/neut": "index.js"
   },
   "scripts": {
-    "test": "test"
+    "test": "test",
+    "clear-npx": "npm cache clean --force && ",
+    "clear-npx-cache": "npx clear-npx-cache"
   },
   "keywords": [
     "neutralino",
@@ -19,6 +21,8 @@
   "author": "Boris Fouomene",
   "license": "MIT",
   "dependencies": {
-    "@fto-consult/electron-gen": "^2.3.1"
+    "@fto-consult/electron-gen": "^2.6.0",
+    "uuid": "^9.0.1",
+    "websocket": "^1.0.34"
   }
 }
