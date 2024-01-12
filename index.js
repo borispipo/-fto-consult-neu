@@ -26,67 +26,65 @@ const options = program.opts();
 const projectRoot = process.cwd();
 
 action = isNonNullString(script)? script.toLowerCase().trim() : "";
-switch(action){
-    case "create":
-        if(!isNonNullString(appName)){
-            throw new Error(`Vous devez spécifier le nom de l' application neu à créer`);
-        }
-        const pPath = path.resolve(projectRoot,appName);
-        const neuConfig = path.resolve(pPath,"neutralino.config.json");
-        const end = (neuExists)=>{
-            if(fs.existsSync(neuConfig)){
-                const JSONManager = JSONFileManager(neuConfig);
-                const exPath = JSONManager.get("cli.extensionsPath") || "/extensions/";
-                const extensionsPath = path.resolve(pPath,exPath.ltrim("/").rtrim("/")).trim();
-                const extDist = path.resolve(extensionsPath,"@fto-consult");
-                copy(path.resolve(__dirname,"extensions","@fto-consult"),extDist);
-                if(fs.existsSync(extDist)){
-                    const etx = JSONManager.get("extensions");
-                    const extensions = Array.isArray(etx)? etx : [];
-                    const nExt = require("./extensions");
-                    nExt.map((e)=>{
-                        if(isNonNullString(e?.id)){
-                            let hasF = false;
-                            for(let i in extensions){
-                                const ee = extensions[i];
-                                if(ee?.id === e?.id){
-                                    hasF = true;
-                                    break;
-                                }
-                            }
-                            if(!hasF){
-                                extensions.push(e);
+if(action ==="create"){
+    if(!isNonNullString(appName)){
+        throw new Error(`Vous devez spécifier le nom de l' application neu à créer`);
+    }
+    const pPath = path.resolve(projectRoot,appName);
+    const neuConfig = path.resolve(pPath,"neutralino.config.json");
+    const end = (neuExists)=>{
+        if(fs.existsSync(neuConfig)){
+            const JSONManager = JSONFileManager(neuConfig);
+            const exPath = JSONManager.get("cli.extensionsPath") || "/extensions/";
+            const extensionsPath = path.resolve(pPath,exPath.ltrim("/").rtrim("/")).trim();
+            const extDist = path.resolve(extensionsPath,"@fto-consult");
+            copy(path.resolve(__dirname,"extensions","@fto-consult"),extDist);
+            if(fs.existsSync(extDist)){
+                const etx = JSONManager.get("extensions");
+                const extensions = Array.isArray(etx)? etx : [];
+                const nExt = require("./extensions");
+                nExt.map((e)=>{
+                    if(isNonNullString(e?.id)){
+                        let hasF = false;
+                        for(let i in extensions){
+                            const ee = extensions[i];
+                            if(ee?.id === e?.id){
+                                hasF = true;
+                                break;
                             }
                         }
-                    })
-                    JSONManager.set({
-                        extensions,
-                    })
-                }
-                JSONManager.set({
-                    enableExtensions: true,
-                    cli : {extensionsPath:exPath},
-                    modes : {
-                        window : {
-                            exitProcessOnClose : true,
-                            extendUserAgentWith : "@fto-consult/neut",
+                        if(!hasF){
+                            extensions.push(e);
                         }
                     }
-                });
-                JSONManager.save();
-                console.log(`application ${appName} ${neuExists ===true?`déjà existante`:'créee avec succès'}`);
+                })
+                JSONManager.set({
+                    extensions,
+                })
             }
+            JSONManager.set({
+                enableExtensions: true,
+                cli : {extensionsPath:exPath},
+                modes : {
+                    window : {
+                        exitProcessOnClose : true,
+                        extendUserAgentWith : "@fto-consult/neut",
+                    }
+                }
+            });
+            JSONManager.save();
+            console.log(`application ${appName} ${neuExists ===true?`déjà existante`:'créee avec succès'}`);
         }
-        if(fs.existsSync(neuConfig)){
-            return end(true);
-        }
-        exec({cmd:`npx neu create ${appName}${options.template && `--template ${options.template}`||''}`,projectRoot}).then(end).catch((e)=>{
-            const message = e?.message || e?.toString();
-            console.error(`${message}`);
-        });
-        break;
-    default : 
-        process.env.isNeutralinoScript = process.env.isNeutralinoScript = true;
-        require("@fto-consult/electron-gen/bin/index");
-        break;
+    }
+    if(fs.existsSync(neuConfig)){
+        return end(true);
+    }
+    exec({cmd:`npx neu create ${appName}${options.template && `--template ${options.template}`||''}`,projectRoot}).then(end).catch((e)=>{
+        const message = e?.message || e?.toString();
+        console.error(`${message}`);
+    });
+    return;
+} else {
+    process.env.isNeutralinoScript = process.env.isNeutralinoScript = true;
+    require("../@fto-consult-electron/bin/index");
 }

@@ -21,7 +21,7 @@
   "author": "Boris Fouomene",
   "license": "MIT",
   "dependencies": {
-    "@fto-consult/electron-gen": "^2.7.2",
+    "@fto-consult/electron-gen": "^2.7.4",
     "uuid": "^9.0.1",
     "websocket": "^1.0.34"
   }
