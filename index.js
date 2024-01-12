@@ -2,8 +2,11 @@ const {isNonNullString} = require("@fto-consult/electron-gen/utils");
 
 module.exports = {
     command: 'fto-consult <action>',
+    //@see : https://github.com/neutralinojs/neutralinojs-cli/blob/main/src/modules/index.js
+    
     register: (command, modules) => {
         command
+            .argument('<cmd>', 'la commande à exécuter (create,start,init,build,package). Start permet de démarrer le script de l\'application, init permet d\'initialiser l\'application, build permet de compiler le code expo (exporter), package permet d\'effectuer le packaging de l\'application pour la distribution')
             .option('-c,--create [appName]',"create neu app name")
             .option("--app-id [appId]","application id, usage with --create command")
             .option('-o, --out [dir]', 'le chemin du répertoire qui contiendra les fichiers générés à l\'aide de la commande make : ; commande : make')
@@ -15,9 +18,16 @@ module.exports = {
             .option('-f, --framework [frameworkName]', `Le nom du framework utilisé pour générer l\'application electron. Les frameworks supportés sont pour l\'instant : [${Object.keys(supportedFrameworks)}]. Le framework [expo] est le framework par défaut`)
             .action(async (action, command) => {
                 // Make app 
+                action = isNonNullString(action)? action.toLowerCase().trim() : "";
+                console.log(action," is acciton ddddd",command.args," is command arguments",process.argv);
+                switch(action){
+                    case "create":
+                        const appName = command
+                        await modules.creator.createApp(appName);
+                        break;
+                }
                 if(isNonNullString(command.create)){
-                    const appName = command
-                    await modules.creator.createApp(appName);
+                    
                     //console.log(`Please check the ${binaryName}/dist folder and find your desktop app.`);
                 }
                 if(isNonNullString(command.appId)){
