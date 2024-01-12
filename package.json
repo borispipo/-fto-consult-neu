@@ -1,6 +1,6 @@
 {
   "name": "@fto-consult/neu",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "description": "Neutralino Pluging for app generator neutralino app generator",
   "main": "index.js",
   "scripts": {

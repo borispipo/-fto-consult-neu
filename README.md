@@ -1,4 +1,4 @@
-# \-fto-consult-neu
+# @fto-consult/neu
 
 ![npm](https://img.shields.io/npm/v/@neutralinojs/appify)  
 ![npm](https://img.shields.io/npm/dt/@neutralinojs/appify)
