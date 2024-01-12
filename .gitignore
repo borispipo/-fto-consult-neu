@@ -1,22 +1,32 @@
-### AL ###
-#Template for AL projects for Dynamics 365 Business Central
-#launch.json folder
-.vscode/
-#Cache folder
-.alcache/
-#Symbols folder
-.alpackages/
-#Snapshots folder
-.snapshots/
-#Testing Output folder
-.output/
-#Extension App-file
-*.app
-#Rapid Application Development File
-rad.json
-#Translation Base-file
-*.g.xlf
-#License-file
-*.flf
-#Test results file
-TestResults.xml
+node_modules/
+.expo/
+dist/
+npm-debug.*
+*.jks
+*.p8
+*.p12
+*.key
+.env
+*.mobileprovision
+*.orig.*
+web-build/
+
+# macOS
+.DS_Store
+.expo-shared/
+expo-ui-production-path.js
+expo-ui-build-path.js
+electron/assets/images/logo.png
+electron/paths.json
+
+
+electron/package.app.json
+
+src/expo-ui.app.config.json
+electron/package.app.json
+electron/package.app.json
+electron/package.app.json
+electron/package.app.json
+mainPackageJSON.js
+mainPackageJSON.json
+package-lock.json

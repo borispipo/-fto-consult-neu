@@ -1,0 +1,21 @@
+{
+  "name": "@fto-consult/neu",
+  "version": "1.0.0",
+  "description": "NeutralinoJs APP generator",
+  "main": "index.js",
+  "scripts": {
+    "test": "test"
+  },
+  "keywords": [
+    "neutralino",
+    "javascript",
+    "typescript",
+    "web",
+    "application"
+  ],
+  "author": "Boris Fouomene",
+  "license": "MIT",
+  "dependencies": {
+    "@fto-consult/electron-gen": "^2.3.1"
+  }
+}
